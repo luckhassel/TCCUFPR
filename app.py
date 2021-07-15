@@ -31,7 +31,10 @@ def post_data(id):
 @app.route('/get/<id>', methods=['GET'])
 def get_data(id):
     data_return = todos.find({"hashid":id})
-    return jsonify(data_return.__str__())
+    data_converted = []
+    for data in data_return:
+        data_converted.append(data)
+    return jsonify(data_converted)
 
 @app.route('/qrcode', methods=['POST'])
 def get_qrcode():
