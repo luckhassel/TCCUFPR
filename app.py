@@ -24,13 +24,14 @@ def post_data(id):
     data_received = request.get_json(force=True)
     temperatura=data_received["temperatura"]
     umidade = data_received["umidade"]
+    todos.insert({"hashid": id, "temperatura": temperatura, "umidade": umidade})
     return jsonify({"id": id, "temperatura": temperatura, "umidade": umidade})
     
 
 @app.route('/get/<id>', methods=['GET'])
 def get_data(id):
     data_return = todos.find({"hashid":id})
-    return jsonify(data_return)
+    return jsonify(data_return.__str__())
 
 @app.route('/qrcode', methods=['POST'])
 def get_qrcode():
