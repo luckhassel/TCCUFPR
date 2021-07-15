@@ -1,3 +1,4 @@
 Flask==1.0.2
 bson==0.5.8
 pymongo==3.7.1
+qrcode==7.1
