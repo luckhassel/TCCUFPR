@@ -13,22 +13,22 @@
     <body>
         <div align="center">
             <h1>MONITOR COVID-19 UFPR</h1>
-            {{% if dados != []%}}
+            {% if dados != [] %}
                 <table>
                     <tr>
                         <th>Temperatura</th>
                         <th>Umidade</th>
                     </tr>
-                    <tr>
-                        {{% for dado in dados% }}
+                    {% for dado in dados %}
+                        <tr>
                             <td>{{dado['temperatura']}}</td>
                             <td>{{dado['umidade']}}</td>
-                    </tr>
-                        {% endfor %}
+                        </tr>
+                    {% endfor %}
                 </table>
-            {{% else %}}
+            {% else %}
                 <p><strong>Nenhum dados disponível no momento!</strong></p>
-            {{% endif %}}
+            {% endif %}
         </div>
     </body>
 </html>
