@@ -1,5 +1,5 @@
 from flask import Flask, render_template,request,jsonify # For flask implementation
-from bson import ObjectId # For ObjectId to work
+from bson import ObjectId, json_util
 from pymongo import MongoClient
 import os
 import qrcode
@@ -26,18 +26,12 @@ def post_data(id):
     umidade = data_received["umidade"]
     todos.insert({"hashid": id, "temperatura": temperatura, "umidade": umidade})
     return jsonify({"id": id, "temperatura": temperatura, "umidade": umidade})
-    
-def converter(o):
-    if (isinstance(o, ObjectId)):
-        return o.__str__()
+
 
 @app.route('/get/<id>', methods=['GET'])
 def get_data(id):
     data_return = todos.find({"hashid":id})
-    data_converted = []
-    for data in data_return:
-        data_converted.append(data)
-    return jsonify(data_converted, default=converter)
+    return json_util.dumps(data_return, default=json_util.default)
 
 @app.route('/qrcode', methods=['POST'])
 def get_qrcode():
