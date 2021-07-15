@@ -37,7 +37,7 @@ def get_data(id):
     data_converted = []
     for data in data_return:
         data_converted.append(data)
-    return jsonify(data_converted, converter)
+    return jsonify(data_converted, default=converter)
 
 @app.route('/qrcode', methods=['POST'])
 def get_qrcode():
