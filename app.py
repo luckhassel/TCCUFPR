@@ -1,4 +1,4 @@
-from flask import Flask, render_template,request,redirect,url_for # For flask implementation
+from flask import Flask, render_template,request,jsonify # For flask implementation
 from bson import ObjectId # For ObjectId to work
 from pymongo import MongoClient
 import os
@@ -13,7 +13,7 @@ client = MongoClient(r"mongodb://coviddbufpr:EKUAzVpLkuj84a63DPqr911vhY8jBzcFj2S
 db = client.mymongodb    #Select the database
 todos = db.coviddata #Select the collection name
 
-BASE_URL = "https://covid19ufpr.azurewebsites.net"
+BASE_URL = "https://covid19ufpr.azurewebsites.net/get/"
 
 @app.route('/', methods=['GET'])
 def main_page():
@@ -21,14 +21,16 @@ def main_page():
 
 @app.route('/post/<id>', methods=['POST'])
 def post_data(id):
-    temperatura=request.values.get("temperatura")
-    umidade = request.values.get("umidade")
-    todos.insert({"hashid": id, "temperatura": temperatura, "umidade": umidade})
+    data_received = request.get_json(force=True)
+    temperatura=data_received["temperatura"]
+    umidade = data_received["umidade"]
+    return jsonify({"id": id, "temperatura": temperatura, "umidade": umidade})
+    
 
 @app.route('/get/<id>', methods=['GET'])
 def get_data(id):
     data_return = todos.find({"hashid":id})
-    return data_return
+    return jsonify(data_return)
 
 @app.route('/qrcode', methods=['POST'])
 def get_qrcode():
@@ -41,5 +43,5 @@ def get_qrcode():
                             codigo=request.values.get("idLote"), nomeImagem=full_filename, title='UFPR COVID MONITOR')
     
 
-#if __name__ == "__main__":
-#   app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
