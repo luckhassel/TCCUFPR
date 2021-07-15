@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet"  type="text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+    </style>
+    <script src=""></script>
+    <body>
+        <div align="center">
+            <h1>MONITOR COVID-19 UFPR</h1>
+            {{% if dados != []%}}
+                <table>
+                    <tr>
+                        <th>Temperatura</th>
+                        <th>Umidade</th>
+                    </tr>
+                    <tr>
+                        {{% for dado in dados% }}
+                            <td>{{dado['temperatura']}}</td>
+                            <td>{{dado['umidade']}}</td>
+                    </tr>
+                        {% endfor %}
+                </table>
+            {{% else %}}
+                <p><strong>Nenhum dados disponível no momento!</strong></p>
+            {{% endif %}}
+        </div>
+    </body>
+</html>

@@ -31,7 +31,8 @@ def post_data(id):
 @app.route('/get/<id>', methods=['GET'])
 def get_data(id):
     data_return = todos.find({"hashid":id})
-    return json_util.dumps(data_return, default=json_util.default)
+    data_converted = json_util.dumps(data_return, default=json_util.default)
+    return render_template('data.html', title='UFPR COVID MONITOR', dados=data_converted[0])
 
 @app.route('/qrcode', methods=['POST'])
 def get_qrcode():
