@@ -24,7 +24,7 @@ def post_data(id):
     data_received = request.get_json(force=True)
     temperatura=data_received["temperatura"]
     umidade = data_received["umidade"]
-    luminosidade = data_received["luminosidade]
+    luminosidade = data_received["luminosidade"]
     todos.insert({"hashid": id, "temperatura": temperatura, "umidade": umidade, "luminosidade": luminosidade})
     return jsonify({"status": "OK", "id": id, "temperatura": temperatura, "umidade": umidade, "luminosidade": luminosidade})
 
