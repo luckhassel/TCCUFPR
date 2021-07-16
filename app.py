@@ -9,7 +9,7 @@ app = Flask(__name__)
 qr_images = os.path.join('static', 'images')
 app.config['QRIMAGES'] = qr_images
 
-client = MongoClient(r"mongodb://coviddbufpr:EKUAzVpLkuj84a63DPqr911vhY8jBzcFj2S74ZVaoMrhX2fmkyUHl5BddllGz1H19XU4N0FWhByqDDmetOD7Ew==@coviddbufpr.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@coviddbufpr@") #PRIMARY CONNECTION STRING
+client = MongoClient(r"mongodb://coviddbufpr:xE80fK9j8LymqvmPSqRHclGk2D0iqGCDxPaRev06r9acwUAaaNMptZx55ExpMOtd3tNSZwA9NF6ccJPTwPulUg==@coviddbufpr.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@coviddbufpr@") #PRIMARY CONNECTION STRING
 db = client.mymongodb    #Select the database
 todos = db.coviddata #Select the collection name
 
@@ -25,14 +25,14 @@ def post_data(id):
     temperatura=data_received["temperatura"]
     umidade = data_received["umidade"]
     todos.insert({"hashid": id, "temperatura": temperatura, "umidade": umidade})
-    return jsonify({"id": id, "temperatura": temperatura, "umidade": umidade})
+    return jsonify({"status": "OK", "id": id, "temperatura": temperatura, "umidade": umidade})
 
 
 @app.route('/get/<id>', methods=['GET'])
 def get_data(id):
     data_return = todos.find({"hashid":id})
     data_converted = json_util.dumps(data_return, default=json_util.default)
-    return render_template('data.html', title='UFPR COVID MONITOR', dados=data_converted[0])
+    return data_converted
 
 @app.route('/qrcode', methods=['POST'])
 def get_qrcode():
