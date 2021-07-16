@@ -24,8 +24,9 @@ def post_data(id):
     data_received = request.get_json(force=True)
     temperatura=data_received["temperatura"]
     umidade = data_received["umidade"]
-    todos.insert({"hashid": id, "temperatura": temperatura, "umidade": umidade})
-    return jsonify({"status": "OK", "id": id, "temperatura": temperatura, "umidade": umidade})
+    luminosidade = data_received["luminosidade]
+    todos.insert({"hashid": id, "temperatura": temperatura, "umidade": umidade, "luminosidade": luminosidade})
+    return jsonify({"status": "OK", "id": id, "temperatura": temperatura, "umidade": umidade, "luminosidade": luminosidade})
 
 
 @app.route('/get/<id>', methods=['GET'])
