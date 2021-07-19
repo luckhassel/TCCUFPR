@@ -16,16 +16,16 @@
             {% if dados != [] %}
                 <table class="table">
                     <tr>
-                        {% for key in dados[0] %}
-                        <th> {{ key.upper() }}</th>
-                        {% endfor %}
+                        <th>Temperatura</th>
+                        <th>Umidade</th>
+                        <th>Luminosidade</th>
                     </tr>
                     {% for elemento in dados %}
-                        <tr>
-                            {% for dado in elemento.values() %}
-                            <td> {{ dado }} </td>
-                            {% endfor %}
-                        </tr>
+                        <td> {{ elemento  }} </td>
+                        {% set i = loop.index %}
+                        {% if i%3 == 0 %}
+                            <tr></tr>
+                        {% endif %}    
                     {% endfor %}
                 </table>
             {% else %}
