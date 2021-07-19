@@ -34,9 +34,8 @@ def post_data(id):
 def get_data(id):
     elements_list = []
     data_return = todos.find({"hashid":id})
-<<<<<<< HEAD
-    #data_converted = json_util.dumps(data_return, default=json_util.default)
-    data = "[{\"_id\": {\"$oid\": \"60f5eb96b8ebb400262a1d89\"}, \"hashid\": \"-8554334466508731059\", \"temperatura\": 16.3, \"umidade\": 41.4, \"luminosidade\": 0}, {\"_id\": {\"$oid\": \"60f5ebc5b8ebb400262a1d8a\"}, \"hashid\": \"-8554334466508731059\", \"temperatura\": 16.3, \"umidade\": 43.8, \"luminosidade\": 0}, {\"_id\": {\"$oid\": \"60f5ebf4b8ebb400262a1d8b\"}, \"hashid\": \"-8554334466508731059\", \"temperatura\": 16.3, \"umidade\": 43.4, \"luminosidade\": 0}, {\"_id\": {\"$oid\": \"60f5ec24b8ebb400262a1d8c\"}, \"hashid\": \"-8554334466508731059\", \"temperatura\": 16.3, \"umidade\": 43.9, \"luminosidade\": 0}, {\"_id\": {\"$oid\": \"60f5ec53b8ebb400262a1d8d\"}, \"hashid\": \"-8554334466508731059\", \"temperatura\": 16.3, \"umidade\": 43.3, \"luminosidade\": 0}]"
+
+    data = json_util.dumps(data_return, default=json_util.default)
     data_converted = ast.literal_eval(data)
     for element in data_converted:
         for dado in element.values():
@@ -44,11 +43,6 @@ def get_data(id):
                 elements_list.append(dado)
 
     return render_template('data.html', title='UFPR COVID MONITOR', dados=elements_list)
-=======
-    data_converted = json_util.dumps(data_return, default=json_util.default)
-    return jsonify(data_converted)
-    #return render_template('data.html', title='UFPR COVID MONITOR', dados=data_converted)
->>>>>>> c0e5c96c5b06b5ad6a15ade663803456f880b15f
 
 @app.route('/qrcode', methods=['POST'])
 def get_qrcode():
