@@ -16,13 +16,15 @@
             {% if dados != [] %}
                 <table class="table">
                     <tr>
-                        <th>Temperatura</th>
-                        <th>Umidade</th>
+                        {% for key in dados[0] %}
+                        <th> {{ key.upper() }}</th>
+                        {% endfor %}
                     </tr>
-                    {% for key in dados %}
+                    {% for elemento in dados %}
                         <tr>
-                            <td>{{dados['temperatura']}}ºC</td>
-                            <td>{{dados['umidade']}}%</td>
+                            {% for dado in elemento.values() %}
+                            <td> {{ dado }} </td>
+                            {% endfor %}
                         </tr>
                     {% endfor %}
                 </table>
