@@ -10,7 +10,7 @@ app = Flask(__name__)
 qr_images = os.path.join('static', 'images')
 app.config['QRIMAGES'] = qr_images
 
-client = MongoClient(r"mongodb://coviddbufpr:xE80fK9j8LymqvmPSqRHclGk2D0iqGCDxPaRev06r9acwUAaaNMptZx55ExpMOtd3tNSZwA9NF6ccJPTwPulUg==@coviddbufpr.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@coviddbufpr@") #PRIMARY CONNECTION STRING
+client = MongoClient(r"mongodb://dbufpr:BRzAcXSo0OdsuIK1qL9jFEZhseoVSnfTZqmCCfz2dV9hLeB4Qpd3cUsmK5Z5Oo8jY2Gqo5KXOaBMIDKpL6szYA==@dbufpr.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@dbufpr@") #PRIMARY CONNECTION STRING
 db = client.mymongodb    #Select the database
 todos = db.coviddata #Select the collection name
 
@@ -34,6 +34,7 @@ def post_data(id):
 def get_data(id):
     elements_list = []
     data_return = todos.find({"hashid":id})
+<<<<<<< HEAD
     #data_converted = json_util.dumps(data_return, default=json_util.default)
     data = "[{\"_id\": {\"$oid\": \"60f5eb96b8ebb400262a1d89\"}, \"hashid\": \"-8554334466508731059\", \"temperatura\": 16.3, \"umidade\": 41.4, \"luminosidade\": 0}, {\"_id\": {\"$oid\": \"60f5ebc5b8ebb400262a1d8a\"}, \"hashid\": \"-8554334466508731059\", \"temperatura\": 16.3, \"umidade\": 43.8, \"luminosidade\": 0}, {\"_id\": {\"$oid\": \"60f5ebf4b8ebb400262a1d8b\"}, \"hashid\": \"-8554334466508731059\", \"temperatura\": 16.3, \"umidade\": 43.4, \"luminosidade\": 0}, {\"_id\": {\"$oid\": \"60f5ec24b8ebb400262a1d8c\"}, \"hashid\": \"-8554334466508731059\", \"temperatura\": 16.3, \"umidade\": 43.9, \"luminosidade\": 0}, {\"_id\": {\"$oid\": \"60f5ec53b8ebb400262a1d8d\"}, \"hashid\": \"-8554334466508731059\", \"temperatura\": 16.3, \"umidade\": 43.3, \"luminosidade\": 0}]"
     data_converted = ast.literal_eval(data)
@@ -43,6 +44,11 @@ def get_data(id):
                 elements_list.append(dado)
 
     return render_template('data.html', title='UFPR COVID MONITOR', dados=elements_list)
+=======
+    data_converted = json_util.dumps(data_return, default=json_util.default)
+    return jsonify(data_converted)
+    #return render_template('data.html', title='UFPR COVID MONITOR', dados=data_converted)
+>>>>>>> c0e5c96c5b06b5ad6a15ade663803456f880b15f
 
 @app.route('/qrcode', methods=['POST'])
 def get_qrcode():
