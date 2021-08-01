@@ -4,6 +4,7 @@ from pymongo import MongoClient
 import os
 import qrcode
 import ast
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -22,12 +23,14 @@ def main_page():
 
 @app.route('/post/<id>', methods=['POST'])
 def post_data(id):
+    now = datetime.now()
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
     data_received = request.get_json(force=True)
     temperatura=data_received["temperatura"]
     umidade = data_received["umidade"]
     luminosidade = data_received["luminosidade"]
-    todos.insert({"hashid": id, "temperatura": temperatura, "umidade": umidade, "luminosidade": luminosidade})
-    return jsonify({"status": "OK", "id": id, "temperatura": temperatura, "umidade": umidade, "luminosidade": luminosidade})
+    todos.insert({"hashid": id, "periodo": dt_string,"temperatura": temperatura, "umidade": umidade, "luminosidade": luminosidade})
+    return jsonify({"status": "OK", "id": id, "periodo":dt_string, "temperatura": temperatura, "umidade": umidade, "luminosidade": luminosidade})
 
 
 @app.route('/get/<id>', methods=['GET'])
@@ -38,9 +41,13 @@ def get_data(id):
     data = json_util.dumps(data_return, default=json_util.default)
     data_converted = ast.literal_eval(data)
     for element in data_converted:
-        for dado in element.values():
-            if (type(dado) is int) or (type(dado) is float):
-                elements_list.append(dado)
+        #for dado in element.values():
+        #    if (type(dado) is int) or (type(dado) is float):
+        #        elements_list.append(dado)
+        elements_list.append(element['periodo'])
+        elements_list.append(element['temperatura'])
+        elements_list.append(element['umidade'])
+        elements_list.append(element['luminosidade'])
 
     return render_template('data.html', title='UFPR COVID MONITOR', dados=elements_list)
 

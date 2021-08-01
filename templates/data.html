@@ -16,14 +16,15 @@
             {% if dados != [] %}
                 <table class="table">
                     <tr>
-                        <th>Temperatura</th>
-                        <th>Umidade</th>
+                        <th>Data e hora</th>
+                        <th>Temperatura (°C)</th>
+                        <th>Umidade (%)</th>
                         <th>Luminosidade</th>
                     </tr>
                     {% for elemento in dados %}
                         <td> {{ elemento  }} </td>
                         {% set i = loop.index %}
-                        {% if i%3 == 0 %}
+                        {% if i%4 == 0 %}
                             <tr></tr>
                         {% endif %}    
                     {% endfor %}
