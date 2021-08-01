@@ -4,7 +4,7 @@ from pymongo import MongoClient
 import os
 import qrcode
 import ast
-from datetime import datetime
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
@@ -23,7 +23,7 @@ def main_page():
 
 @app.route('/post/<id>', methods=['POST'])
 def post_data(id):
-    now = datetime.now()
+    now = datetime.now() - timedelta(hours=3)
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
     data_received = request.get_json(force=True)
     temperatura=data_received["temperatura"]
@@ -41,9 +41,6 @@ def get_data(id):
     data = json_util.dumps(data_return, default=json_util.default)
     data_converted = ast.literal_eval(data)
     for element in data_converted:
-        #for dado in element.values():
-        #    if (type(dado) is int) or (type(dado) is float):
-        #        elements_list.append(dado)
         elements_list.append(element['periodo'])
         elements_list.append(element['temperatura'])
         elements_list.append(element['umidade'])
