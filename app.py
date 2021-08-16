@@ -11,7 +11,7 @@ app = Flask(__name__)
 qr_images = os.path.join('static', 'images')
 app.config['QRIMAGES'] = qr_images
 
-client = MongoClient(r"mongodb://coviddbufpr:OYOk5xCAzPBpLftMTXobakxt03eRKkBHfhLnLLiEme9aqttcWMUpmgNNusDbFfOUghwBmRHZBRQwlhJDMtRhGw==@coviddbufpr.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@coviddbufpr@") #PRIMARY CONNECTION STRING
+client = MongoClient(r"mongodb://dbcovid:jJKZMcJ1Uhh0kVVzVDXCubicG6UBkLreHJcR4uY830VRAEFtk3Tw0w6RJn7xm93wDEiaMFj9ukJIbIQIgg62rg==@dbcovid.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@dbcovid@") #PRIMARY CONNECTION STRING
 db = client.mymongodb    #Select the database
 todos = db.coviddata #Select the collection name
 
