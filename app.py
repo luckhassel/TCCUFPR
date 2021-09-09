@@ -11,7 +11,7 @@ app = Flask(__name__)
 qr_images = os.path.join('static', 'images')
 app.config['QRIMAGES'] = qr_images
 
-client = MongoClient(os.environ['DBCONNECTION'])
+client = MongoClient(os.environ['CUSTOMCONNSTR_DBCONNECTION'])
 db = client.mymongodb
 todos = db.coviddata
 
