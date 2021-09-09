@@ -1,4 +1,4 @@
-from flask import Flask, render_template,request,jsonify # For flask implementation
+from flask import Flask, render_template,request,jsonify
 from bson import ObjectId, json_util
 from pymongo import MongoClient
 import os
@@ -11,9 +11,9 @@ app = Flask(__name__)
 qr_images = os.path.join('static', 'images')
 app.config['QRIMAGES'] = qr_images
 
-client = MongoClient(r"mongodb://dbcovid:jJKZMcJ1Uhh0kVVzVDXCubicG6UBkLreHJcR4uY830VRAEFtk3Tw0w6RJn7xm93wDEiaMFj9ukJIbIQIgg62rg==@dbcovid.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@dbcovid@") #PRIMARY CONNECTION STRING
-db = client.mymongodb    #Select the database
-todos = db.coviddata #Select the collection name
+client = MongoClient(os.environ["DBCONNECTION"])
+db = client.mymongodb
+todos = db.coviddata
 
 BASE_URL = "https://covid19ufpr.azurewebsites.net/get/"
 
