@@ -12,13 +12,12 @@ app = Flask(__name__)
 qr_images = os.path.join('static', 'images')
 app.config['QRIMAGES'] = qr_images
 
-client = MongoClient("mongodb://dbcovid:jJKZMcJ1Uhh0kVVzVDXCubicG6UBkLreHJcR4uY830VRAEFtk3Tw0w6RJn7xm93wDEiaMFj9ukJIbIQIgg62rg==@dbcovid.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@dbcovid@")
-#client = MongoClient(os.environ['CUSTOMCONNSTR_DBCONNECTION'])
+client = MongoClient(os.environ['CUSTOMCONNSTR_DBCONNECTION'])
 db = client.mymongodb
 dados_viagem = db.coviddata
 
-BASE_URL = "https://127.0.0.1:5000/get/"
-#BASE_URL = "https://covid19ufpr.azurewebsites.net/get/"
+#BASE_URL = "https://127.0.0.1:5000/get/"
+BASE_URL = "https://covid19ufpr.azurewebsites.net/get/"
 
 @app.route('/', methods=['GET'])
 def main_page():
