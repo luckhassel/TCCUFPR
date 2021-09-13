@@ -7,31 +7,174 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
     </style>
     <script src=""></script>
     <body>
         <div align="center">
             <h1>MONITOR COVID-19 UFPR</h1>
-            {% if dados != [] %}
-                <table class="table">
-                    <tr>
-                        <th>Data e hora</th>
-                        <th>Temperatura (°C)</th>
-                        <th>Umidade (%)</th>
-                        <th>Luminosidade</th>
-                    </tr>
-                    {% for elemento in dados %}
-                        <td> {{ elemento  }} </td>
-                        {% set i = loop.index %}
-                        {% if i%4 == 0 %}
-                            <tr></tr>
-                        {% endif %}    
-                    {% endfor %}
+            <h3>Dados da viagem de {{origem}} a {{destino}} ({{idLote}})</h3>
+            <div class="tab">
+                <table>
+                    <td><button id="tableButton" class="button btn tablinks" onclick="openTab(event, 'dataTable')">Tabela</button></td>
+                    <br>
+                    <td><button id="plotButton" class="button btn tablinks" onclick="openTab(event, 'myPlot')">Gráfico</button></td>
                 </table>
-            {% else %}
-                <p><strong>Nenhum dados disponível no momento!</strong></p>
-            {% endif %}
+            </div>
+            <br>
+            <div id="dataTable" class="tabcontent"> 
+                {% if dados != [] %}
+                    <table class="table">
+                        <tr>
+                            <th>Data e hora</th>
+                            <th>Temperatura (°C)</th>
+                            <th>Umidade (%)</th>
+                            <th>Luminosidade</th>
+                        </tr>
+                        {% for elemento in dados %}
+                            <td> {{ elemento  }} </td>
+                            {% set i = loop.index %}
+                            {% if i%4 == 0 %}
+                                <tr></tr>
+                            {% endif %}    
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <p><strong>Nenhum dado disponível no momento!</strong></p>
+                {% endif %}
+            </div>
         </div>
+        <div id="myPlot" class="tabcontent">
+            <table>
+                <tr>
+                    <td><div id="plotTemperature" style="width:100%;max-width:650px"></div></td>
+                    <td><div id="plotLuminosity" style="width:100%;max-width:650px"></div></td>
+                </tr>
+                <tr>
+                    <td><div id="plotHumidity" style="width:100%;max-width:650px"></div></td>
+                </tr>
+            </table>
+        </div>
+
+        <script>
+            var yArrayString = '{{temperatura}}';
+            var xArrayString = '{{periodo}}';
+            var yArray = eval(yArrayString);
+            var xArray = xArrayString.split(',');
+            
+            var size = xArray.length;
+
+            for(var i=0; i<size; i++){
+                xArray[i] = xArray[i].substr(6,19);
+            }
+
+            console.log(yArray);
+            console.log(typeof(yArray));
+            console.log(xArray);
+            console.log(typeof(xArray));
+            // Define Data
+            var data = [{
+            x:xArray,
+            y:yArray,
+            mode:"lines"
+            }];
+
+            // Define Layout
+            var layout = {
+            yaxis: {range: [-20, 40], title: "Temperatura (°C)"},
+            xaxis: {range: xArray, title: "Periodo"},  
+            title: "Gráfico de Temperatura"
+            };
+
+            // Display using Plotly
+            Plotly.newPlot("plotTemperature", data, layout);
+        </script>
+        <script>
+            var yArrayString = '{{umidade}}';
+            var xArrayString = '{{periodo}}';
+            var yArray = eval(yArrayString);
+            var xArray = xArrayString.split(',');
+            
+            var size = xArray.length;
+
+            for(var i=0; i<size; i++){
+                xArray[i] = xArray[i].substr(6,19);
+            }
+
+            console.log(yArray);
+            console.log(typeof(yArray));
+            console.log(xArray);
+            console.log(typeof(xArray));
+            // Define Data
+            var data = [{
+            x:xArray,
+            y:yArray,
+            mode:"lines"
+            }];
+
+            // Define Layout
+            var layout = {
+            yaxis: {range: [0, 100], title: "Umidade (%)"},
+            xaxis: {range: xArray, title: "Periodo"},  
+            title: "Gráfico de Umidade"
+            };
+
+            // Display using Plotly
+            Plotly.newPlot("plotHumidity", data, layout);
+        </script>
+        <script>
+            var yArrayString = '{{luminosidade}}';
+            var xArrayString = '{{periodo}}';
+            var yArray = eval(yArrayString);
+            var xArray = xArrayString.split(',');
+            
+            var size = xArray.length;
+
+            for(var i=0; i<size; i++){
+                xArray[i] = xArray[i].substr(6,19);
+            }
+
+            console.log(yArray);
+            console.log(typeof(yArray));
+            console.log(xArray);
+            console.log(typeof(xArray));
+            // Define Data
+            var data = [{
+            x:xArray,
+            y:yArray,
+            mode:"lines"
+            }];
+
+            // Define Layout
+            var layout = {
+            yaxis: {range: [0,1], title: "Luminosidade"},
+            xaxis: {range: xArray, title: "Periodo"},  
+            title: "Gráfico de Luminosidade"
+            };
+
+            // Display using Plotly
+            Plotly.newPlot("plotLuminosity", data, layout);
+        </script>
+        <script>
+            function openTab(evt, cityName) {
+              var i, tabcontent, tablinks;
+              tabcontent = document.getElementsByClassName("tabcontent");
+              for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+              }
+              tablinks = document.getElementsByClassName("tablinks");
+              for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+              }
+              document.getElementById(cityName).style.display = "block";
+              evt.currentTarget.className += " active";
+            }
+        </script>
+        <script>
+            jQuery(function(){
+                jQuery('#tableButton').click();
+            });
+        </script>
     </body>
 </html>
