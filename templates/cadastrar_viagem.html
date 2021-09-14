@@ -14,18 +14,21 @@
         </div>
     
         <div align="center">  
-            <form method="POST" action="/">
+            <form method="POST" action="/qrcode">
                 <div class="form-group">
-                    <label for="origem">E-mail:</label><br>
-                    <input class="form-control" type="email" id="email" name="email" value="" required><br>
+                    <label for="origem">Local de origem:</label><br>
+                    <input size="50" class="form-control" type="text" id="origem" name="origem" placeholder="Ex: Curitiba" required><br>
                 </div>
                 <div class="form-group">
-                    <label for="destino">Senha</label><br>
-                    <input class="form-control" type="password" id="senha" name="senha" value="" required><br>
+                    <label for="destino">Local de destino:</label><br>
+                    <input class="form-control" type="text" id="destino" name="destino" placeholder="Ex: Curitiba" required><br>
                 </div>
-                <input class="btn btn-primary" type="submit" value="Entrar">
+                <div class="form-group">
+                    <label for="idLote">ID do lote:</label><br>
+                    <input class="form-control" type="text" id="idLote" name="idLote" placeholder="Ex: 51574684" required><br>
+                </div>
+                <input class="btn btn-primary" type="submit" value="Registrar">
             </form>
-            <button class="btn btn-link"><a href="{{ url_for('cadastrar_pessoa_page') }}">Cadastrar-se</a></button>
         </div>
 
     </body>
