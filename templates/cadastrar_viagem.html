@@ -1,20 +1,17 @@
-<!DOCTYPE html>
-    <html lang="en">
-    <meta charset="UTF-8">
-    <title>{{title}}</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet"  type="text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <body>
-
-        <div align="center">
-            <h1>MONITOR COVID-19 UFPR</h1>
-        </div>
-    
+{% extends 'base.html' %}
+    {% block content %}    
         <div align="center">  
             <form method="POST" action="/qrcode">
+                <div align="center">
+                    {% for message in get_flashed_messages() %}
+                        <div class="alert alert-info alert-dismissible" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                </div>
                 <div class="form-group">
                     <label for="origem">Local de origem:</label><br>
                     <input size="50" class="form-control" type="text" id="origem" name="origem" placeholder="Ex: Curitiba" required><br>
@@ -27,9 +24,56 @@
                     <label for="idLote">ID do lote:</label><br>
                     <input class="form-control" type="text" id="idLote" name="idLote" placeholder="Ex: 51574684" required><br>
                 </div>
+                <div class="form-group">
+                    <label for="telefone">Telefone:</label><br>
+                    <input class="form-control" type="tel" id="telefone" name="telefone" placeholder="Ex: 4199999999" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="idEquipamento">ID do equipamento:</label><br>
+                    <input class="form-control" type="text" id="idEquipamento" name="idEquipamento" placeholder="Ex: 5" required><br>
+                </div>
+                <table>
+                    <td>
+                        <div class="form-group">
+                            <label for="temperatura_minima">Temperatura mínima:</label><br>
+                            <input class="form-control" type="text" id="temperatura_minima" name="temperatura_minima" placeholder="Ex: 25" required><br>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label for="temperatura_maxima">Temperatura máxima:</label><br>
+                            <input class="form-control" type="text" id="temperatura_maxima" name="temperatura_maxima" placeholder="Ex: 25" required><br>
+                        </div>
+                    </td>
+                <table>
+                    <td>
+                        <div class="form-group">
+                            <label for="luminosidade_minima">Luminosidade mínima:</label><br>
+                            <input class="form-control" type="text" id="luminosidade_minima" name="luminosidade_minima" placeholder="Ex: 0" required><br>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label for="luminosidade_maxima">Luminosidade máxima:</label><br>
+                            <input class="form-control" type="text" id="luminosidade_maxima" name="luminosidade_maxima" placeholder="Ex: 1" required><br>
+                        </div>
+                    </td>
+                <table>
+                    <td>
+                        <div class="form-group">
+                            <label for="umidade_minima">Umidade mínima:</label><br>
+                            <input class="form-control" type="text" id="umidade_minima" name="umidade_minima" placeholder="Ex: 35" required><br>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                        <label for="umidade_maxima">Umidade máxima:</label><br>
+                        <input class="form-control" type="text" id="umidade_maxima" name="umidade_maxima" placeholder="Ex: 78" required><br>
+                        </div>
+                    </td>
+                </table>
                 <input class="btn btn-primary" type="submit" value="Registrar">
             </form>
         </div>
 
-    </body>
-</html>
+{% endblock %}

@@ -7,10 +7,21 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <body>
+    <body style="background-color: rgb(185, 185, 187);">
 
         <div align="center">
             <h1>MONITOR COVID-19 UFPR</h1>
+        </div>
+
+        <div align="center">
+            {% for message in get_flashed_messages() %}
+                <div class="alert alert-info alert-dismissible" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
         </div>
     
         <div align="center">  
@@ -25,7 +36,7 @@
                 </div>
                 <input class="btn btn-primary" type="submit" value="Entrar">
             </form>
-            <button class="btn btn-link"><a href="{{ url_for('cadastrar_pessoa_page') }}">Cadastrar-se</a></button>
+            <button class="btn btn-link"><a href="{{ url_for('cadastrar_pessoa_page') }}"><strong>Cadastrar-se</strong></a></button>
         </div>
 
     </body>

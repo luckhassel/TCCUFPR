@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+    {% block content %}    
+    <div align="center">
+        <h3>Bem-vindo, {{nome_pessoa}}!</h3>
+        <form method="GET" action="/cadastro_viagem">
+            <input class="btn btn-primary" type="submit" value="Cadastrar viagem">
+        </form>
+        <br>
+        <div id="dataTable" class="tabcontent"> 
+            {% if dados != [] %}
+                <table class="table">
+                    <tr>
+                        <th>Dados da viagem</th>
+                        <th>Visualizar</th>
+                    </tr>
+                    {% for elemento in dados %}
+                        <td> {{ elemento  }} </td>
+                        {% set i = loop.index - 1%}
+                        <td><a href="{{ url_for('get_data', id=hash[i]) }}">Acessar</a></td>
+                            <tr></tr>
+                            
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p><strong>Nenhuma viagem cadastrada até o momento!</strong></p>
+            {% endif %}
+        </div>
+    </div>
+    {% endblock %}
