@@ -165,6 +165,16 @@ def cadastrar_equipamento():
         "luminosidade_maxima": 1, "umidade_minima": 0, "umidade_maxima": 50, "hashURL": "teste"})
         return jsonify({"Status": "Ok - Equipment added"})
 
+@app.route('/get_equipamento/<id>', methods=['GET'])
+def get_equipamento(id):
+    data_return = dados_equipamentos.find({"idEquipamento": int(id)})
+    data = json_util.dumps(data_return, default=json_util.default)
+    if data != "[]":
+        data_converted = ast.literal_eval(data)
+        return jsonify(data_converted[0])
+    else:
+        return jsonify({"Status": "Erro - Nao foi possivel encontrar equipamento com esse ID"})
+        
 @app.route('/qrcode', methods=['POST'])
 def get_qrcode():
     if not session.get("name"):
