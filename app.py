@@ -115,7 +115,8 @@ def post_data(id):
         umidade = data_received["umidade"]
         luminosidade = data_received["luminosidade"]
         dados_viagem.insert({"hashid": id, "periodo": dt_string,"temperatura": temperatura, "umidade": umidade, "luminosidade": luminosidade})
-        return jsonify({"status": "OK", "id": id, "periodo":dt_string, "temperatura": temperatura, "umidade": umidade, "luminosidade": luminosidade})
+        #return jsonify({"status": "OK", "id": id, "periodo":dt_string, "temperatura": temperatura, "umidade": umidade, "luminosidade": luminosidade})
+        return jsonify({"status":"OK"})
 
 
 @app.route('/get/<id>', methods=['GET'])
