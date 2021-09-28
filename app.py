@@ -108,9 +108,6 @@ def cadastrar_viagem_page():
 
 @app.route('/post/<id>', methods=['POST'])
 def post_data(id):
-    if not session.get("name"):
-        return redirect(url_for("login_page"))
-    else:
         now = datetime.now() - timedelta(hours=3)
         dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
         data_received = request.get_json(force=True)
