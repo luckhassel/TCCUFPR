@@ -197,7 +197,7 @@ def get_qrcode():
             {"$set": {"telefone": str(request.values.get("telefone")), "temperatura_minima": int(request.values.get("temperatura_minima")), 
             "temperatura_maxima": int(request.values.get("temperatura_maxima")), "luminosidade_minima": int(request.values.get("luminosidade_minima")),
             "luminosidade_maxima": int(request.values.get("luminosidade_maxima")), "umidade_minima": int(request.values.get("umidade_minima")), 
-            "umidade_maxima": int(request.values.get("umidade_maxima")), "hashURL": BASE_URL_HTTP + str(hash_generated)}})
+            "umidade_maxima": int(request.values.get("umidade_maxima")), "hashURL": "/post/" + str(hash_generated)}})
             dados_pessoas.update_one({"email": session["email"]}, {"$push": {"viagens": hash_generated}})
             img = qrcode.make(f'{BASE_URL}{hash_generated}')
             img.save(f'{hash_generated}.png')
