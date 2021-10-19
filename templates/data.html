@@ -17,7 +17,7 @@
                         <th>Data e hora</th>
                         <th>Temperatura (°C)</th>
                         <th>Umidade (%)</th>
-                        <th>Luminosidade</th>
+                        <th>Luminosidade (LUX)</th>
                     </tr>
                     {% for elemento in dados %}
                         <td> {{ elemento  }} </td>
@@ -35,11 +35,13 @@
     <div id="myPlot" class="tabcontent">
         <table>
             <tr>
-                <td><div id="plotTemperature" style="width:100%;max-width:650px"></div></td>
-                <td><div id="plotLuminosity" style="width:100%;max-width:650px"></div></td>
+                <td><div id="plotTemperature" style="width:100%;max-width:850px"></div></td>
             </tr>
             <tr>
-                <td><div id="plotHumidity" style="width:100%;max-width:650px"></div></td>
+                <td><div id="plotLuminosity" style="width:100%;max-width:850px"></div></td>
+            </tr>
+            <tr>
+                <td><div id="plotHumidity" style="width:100%;max-width:850px"></div></td>
             </tr>
         </table>
     </div>
