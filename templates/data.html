@@ -35,13 +35,13 @@
     <div align="center" id="myPlot" class="tabcontent">
         <table>
             <tr>
-                <td><div id="plotTemperature" style="width:100%;max-width:850px"></div></td>
+                <td><div id="plotTemperature" style="width:100%;max-width:1000px"></div></td>
             </tr>
             <tr>
-                <td><div id="plotLuminosity" style="width:100%;max-width:850px"></div></td>
+                <td><div id="plotLuminosity" style="width:100%;max-width:1000px"></div></td>
             </tr>
             <tr>
-                <td><div id="plotHumidity" style="width:100%;max-width:850px"></div></td>
+                <td><div id="plotHumidity" style="width:100%;max-width:1000px"></div></td>
             </tr>
         </table>
     </div>
@@ -137,7 +137,7 @@
 
         // Define Layout
         var layout = {
-        yaxis: {range: [0,1], title: "Luminosidade"},
+        yaxis: {range: [0,10000], title: "Luminosidade (LUX)"},
         xaxis: {range: xArray, title: "Periodo"},  
         title: "Gráfico de Luminosidade"
         };
