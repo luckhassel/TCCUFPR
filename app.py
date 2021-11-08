@@ -130,6 +130,16 @@ def get_data(id):
         humidity_list = []
         luminosity_list = []
         data_return = dados_viagem.find({"hashid":id})
+        equipment_data = dados_equipamentos.find({"idEquipamento":1})
+        equipment_json = json_util.dumps(equipment_data, default=json_util.default)
+        equipment_converted = ast.literal_eval(equipment_json)
+
+        u_min = equipment_converted[0]["umidade_minima"]
+        u_max = equipment_converted[0]["umidade_maxima"]
+        l_min = equipment_converted[0]["luminosidade_minima"]
+        l_max = equipment_converted[0]["luminosidade_maxima"]
+        t_min = equipment_converted[0]["temperatura_minima"]
+        t_max = equipment_converted[0]["temperatura_maxima"]
 
         data = json_util.dumps(data_return, default=json_util.default)
         data_converted = ast.literal_eval(data)
@@ -148,7 +158,8 @@ def get_data(id):
 
         return render_template('data.html', title='UFPR COVID MONITOR', origem=dict_data["origem"], 
         destino=dict_data["destino"], idLote=dict_data["idLote"], dados=elements_list, periodo=period_list,
-        temperatura=temperature_list, umidade=humidity_list, luminosidade=luminosity_list)
+        temperatura=temperature_list, umidade=humidity_list, luminosidade=luminosity_list,
+        u_min=u_min, u_max=u_max, l_min=l_min, l_max=l_max, t_min=t_min, t_max=t_max)
 
 @app.route('/cadastrar_equipamento', methods=['POST'])
 def cadastrar_equipamento():

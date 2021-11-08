@@ -51,11 +51,19 @@
         var xArrayString = '{{periodo}}';
         var yArray = eval(yArrayString);
         var xArray = xArrayString.split(',');
+        var Tmax = [];
+        var Tmin = [];
+        var xTempConstantMin = '{{t_min}}';
+        var xTempConstantMax = '{{t_max}}';
+        console.log(typeof(xTempConstantMin));
+        console.log(typeof(xTempConstantMax));
         
         var size = xArray.length;
 
         for(var i=0; i<size; i++){
             xArray[i] = xArray[i].substr(6,19);
+            Tmax.push(parseInt(xTempConstantMax));
+            Tmin.push(parseInt(xTempConstantMin));
         }
 
         console.log(yArray);
@@ -66,7 +74,20 @@
         var data = [{
         x:xArray,
         y:yArray,
-        mode:"lines"
+        mode:"lines",
+        name:"Dados de temperatura"
+        },
+        {
+        x:xArray,
+        y:Tmax,
+        mode:"lines",
+        name:"Limite superior"
+        },
+        {
+        x:xArray,
+        y:Tmin,
+        mode:"lines",
+        name:"Limite inferior"
         }];
 
         // Define Layout
@@ -84,11 +105,17 @@
         var xArrayString = '{{periodo}}';
         var yArray = eval(yArrayString);
         var xArray = xArrayString.split(',');
+        var Umax = [];
+        var Umin = [];
+        var xUmidConstantMin = '{{u_min}}';
+        var xUmidConstantMax = '{{u_max}}';
         
         var size = xArray.length;
 
         for(var i=0; i<size; i++){
             xArray[i] = xArray[i].substr(6,19);
+            Umax.push(xUmidConstantMax);
+            Umin.push(xUmidConstantMin);
         }
 
         console.log(yArray);
@@ -99,7 +126,20 @@
         var data = [{
         x:xArray,
         y:yArray,
-        mode:"lines"
+        mode:"lines",
+        name:"Dados de umidade"
+        },
+        {
+        x:xArray,
+        y:Umax,
+        mode:"lines",
+        name:"Limite superior"
+        },
+        {
+        x:xArray,
+        y:Umin,
+        mode:"lines",
+        name:"Limite inferior"
         }];
 
         // Define Layout
@@ -117,11 +157,17 @@
         var xArrayString = '{{periodo}}';
         var yArray = eval(yArrayString);
         var xArray = xArrayString.split(',');
+        var Lmax = [];
+        var Lmin = [];
+        var xLumConstantMin = '{{l_min}}';
+        var xLumConstantMax = '{{l_max}}';
         
         var size = xArray.length;
 
         for(var i=0; i<size; i++){
             xArray[i] = xArray[i].substr(6,19);
+            Lmax.push(xLumConstantMax);
+            Lmin.push(xLumConstantMin);
         }
 
         console.log(yArray);
@@ -132,7 +178,20 @@
         var data = [{
         x:xArray,
         y:yArray,
-        mode:"lines"
+        mode:"lines",
+        name:"Dados de luminosidade"
+        },
+        {
+        x:xArray,
+        y:Lmax,
+        mode:"lines",
+        name:"Limite superior"
+        },
+        {
+        x:xArray,
+        y:Lmin,
+        mode:"lines",
+        name:"Limite inferior"
         }];
 
         // Define Layout
